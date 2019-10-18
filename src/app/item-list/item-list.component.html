@@ -1,0 +1,98 @@
+<table class="item-box" *ngFor="let item of items">
+  <tr>
+    <td>item num.</td>
+    <td>{{ item.id }}</td>
+  </tr>
+  <tr>
+    <td>物品系統標識名</td>
+    <td>{{ item.name }}</td>
+  </tr>
+  <tr>
+    <td>遊戲顯示名稱</td>
+    <td>{{ item.displayName }}</td>
+  </tr>
+  <tr>
+    <td>調用模型組名字</td>
+    <td>{{ item.modelGroupName }}</td>
+  </tr>
+  <tr>
+    <td>調用模型數量</td>
+    <td>{{ item.numOfModel }}</td>
+  </tr>
+  <tr>
+    <td>調用物品模型</td>
+    <td>{{ item.modelName }}</td>
+  </tr>
+  <tr>
+    <td>調用替換模型（如劍鞘、前綴變化的裝備）</td>
+    <td>{{ item.specialModelName }}</td>
+  </tr>
+  <tr>
+    <td>模型替換或顯示條件：基數為0</td>
+    <td>{{ item.specialModelRules }}</td>
+  </tr>
+  <tr>
+    <td>物品類別</td>
+    <td>{{ item.itemType }}</td>
+  </tr>
+  <tr>
+    <td>可行性</td>
+    <td>{{ item.availability }}</td>
+  </tr>
+  <tr>
+    <td>基礎價格</td>
+    <td>{{ item.price }}</td>
+  </tr>
+  <tr>
+    <td>可擁有前綴：基數為0</td>
+    <td>{{ item.allowPrefix }}</td>
+  </tr>
+  <tr>
+    <td>重量</td>
+    <td>{{ item.weight }}</td>
+  </tr>
+  <tr>
+    <td>充足度</td>
+    <td>{{ item.toFill }}</td>
+  </tr>
+  <tr>
+    <td>頭防；貨品：質量</td>
+    <td>{{ item.headDef }}</td>
+  </tr>
+  <tr>
+    <td>體防；馬：裝甲(防護)；盾：抵抗（血）</td>
+    <td>{{ item.bodyDef }}</td>
+  </tr>
+  <tr>
+    <td>腳防；弩、槍：精度</td>
+    <td>{{ item.legDef }}</td>
+  </tr>
+  <tr>
+    <td>要求，如騎術、力氣等；箭、矢、貨品無效</td>
+    <td>{{ item.prerequisite }}</td>
+  </tr>
+  <tr>
+    <td>耐久</td>
+    <td>{{ item.durability }}</td>
+  </tr>
+  <tr>
+    <td>武器速度；馬：操縱；槍弩：填充速度</td>
+    <td>{{ item.weaponSpeed }}</td>
+  </tr>
+  <tr>
+    <td>飛行物速度；馬：速度</td>
+    <td>{{ item.speed }}</td>
+  </tr>
+  <tr>
+    <td>觸及範圍；盾：尺寸（覆蓋範圍）；擲器拋物線距離</td>
+    <td>{{ item.area }}</td>
+  </tr>
+  <tr>
+    <td>數量</td>
+    <td>{{ item.amount }}</td>
+  </tr>
+  <tr>
+    <td>穿刺帶來的傷；馬：衝刺(無傷害類別)</td>
+    <td>{{ item.damage }}</td>
+  </tr>
+</table>

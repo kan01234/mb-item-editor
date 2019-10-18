@@ -1,0 +1,15 @@
+<div>
+  <input type="file" id="txtFileInput" (change)="uploadFile($event)" />
+</div>
+
+<div>
+  <p>
+    Filename: {{ fileName }}
+  </p>
+  <p>
+    File size: {{ fileSize }} Bytes
+  </p>
+  <!-- <p>
+    Filen content: {{ fileContent }}
+  </p> -->
+</div>
