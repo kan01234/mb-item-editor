@@ -17,8 +17,26 @@ export class ItemListComponent {
       name: {
         title: 'name'
       },
+      mappedName: {
+        title: 'mappedName'
+      },
       displayName: {
         title: 'displayName'
+      },
+      modelGroupName: {
+        title: 'modelGroupName'
+      },
+      numOfModel: {
+        title: 'numOfModel'
+      },
+      modelName: {
+        title: 'modelName'
+      },
+      specialModelName: {
+        title: 'specialModelName'
+      },
+      specialModelRules: {
+        title: 'specialModelRules'
       },
       itemType: {
         title: 'itemType'
@@ -74,3 +92,5 @@ export class ItemListComponent {
   @Input() items: Item[] = [];
 
 }
+
+    

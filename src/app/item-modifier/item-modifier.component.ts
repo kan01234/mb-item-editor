@@ -35,9 +35,10 @@ const itemFields: string[] = [
 
 export class ItemModifierComponent {
 
-  items: Item[];
+  items: Item[] = [];
+  itemNames: {} = {};
 
-  frCompolete(str: string) {
+  itemDatafrCompolete(str: string) {
     let lines = str.match(/^ ([a-z][a-z_0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)/gm);
     let items: Item[] = [];
     let count = 0;
@@ -50,6 +51,24 @@ export class ItemModifierComponent {
         items.push(item);
     }
     this.items = items;
+    this.mapItems();
+  }
+
+  itemNamefrCompolete(str: string) {
+    let lines: string[] = str.split('\r\n');
+    this.itemNames = {};
+    for (let line of lines) {
+      let names = line.split("|");
+      this.itemNames[names[0]] = names[1];
+    }
+    this.mapItems();
+  }
+
+  mapItems() {
+    if (this.items.length <= 0 || Object.entries(this.itemNames).length <= 0)
+      return;
+    for(let item of this.items)
+      item.mappedName = this.itemNames[item.name];
   }
 
 }
