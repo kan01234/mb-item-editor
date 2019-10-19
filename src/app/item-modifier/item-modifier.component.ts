@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Item } from '../common/Item';
+import { ItemListComponent } from '../item-list/item-list.component';
+import { LocalDataSource } from 'ng2-smart-table';
 
 const itemFields: string[] = [
   'name',
@@ -37,6 +39,7 @@ export class ItemModifierComponent {
 
   items: Item[] = [];
   itemNames: {} = {};
+  dataSource: LocalDataSource;
 
   itemDatafrCompolete(str: string) {
     let lines = str.match(/^ ([a-z][a-z_0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)/gm);
@@ -69,6 +72,8 @@ export class ItemModifierComponent {
       return;
     for(let item of this.items)
       item.mappedName = this.itemNames[item.name];
+    console.log('refresh');
+    this.dataSource = new LocalDataSource(this.items);
   }
 
 }

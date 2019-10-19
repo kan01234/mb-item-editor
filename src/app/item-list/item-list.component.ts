@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Item } from '../common/Item';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'app-item-list',
@@ -10,6 +11,10 @@ import { Item } from '../common/Item';
 export class ItemListComponent {
 
   settings = {
+    pager: {
+      display: true,
+      perPage: 100
+    },
     columns: {
       id: {
         title: 'id'
@@ -89,8 +94,6 @@ export class ItemListComponent {
     }
   };
 
-  @Input() items: Item[] = [];
+  @Input() dataSource: LocalDataSource;
 
 }
-
-    
