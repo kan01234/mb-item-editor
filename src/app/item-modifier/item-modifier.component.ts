@@ -1,6 +1,32 @@
 import { Component } from '@angular/core';
 import { Item } from '../common/Item';
 
+const itemFields: string[] = [
+  'name',
+  'displayName',
+  'modelGroupName',
+  'numOfModel',
+  'modelName',
+  'specialModelName',
+  'specialModelRules',
+  'itemType',
+  'availability',
+  'price',
+  'allowPrefix',
+  'weight',
+  'toFill',
+  'headDef',
+  'bodyDef',
+  'legDef',
+  'prerequisite',
+  'durability',
+  'weaponSpeed',
+  'speed',
+  'area',
+  'amount',
+  'damage'
+];
+
 @Component({
   selector: 'app-item-modifier',
   templateUrl: './item-modifier.component.html',
@@ -10,31 +36,6 @@ import { Item } from '../common/Item';
 export class ItemModifierComponent {
 
   items: Item[];
-  itemFields: string[] = [
-    'name',
-    'displayName',
-    'modelGroupName',
-    'numOfModel',
-    'modelName',
-    'specialModelName',
-    'specialModelRules',
-    'itemType',
-    'availability',
-    'price',
-    'allowPrefix',
-    'weight',
-    'toFill',
-    'headDef',
-    'bodyDef',
-    'legDef',
-    'prerequisite',
-    'durability',
-    'weaponSpeed',
-    'speed',
-    'area',
-    'amount',
-    'damage'
-  ];
 
   frCompolete(str: string) {
     let lines = str.match(/^ ([a-z][a-z_0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)/gm);
@@ -44,8 +45,8 @@ export class ItemModifierComponent {
         let fields = line.substring(1).split(/[ ]{1,}/g);
         let item: Item = new Item();
         item.id = count++;
-        for (let i in this.itemFields)
-            item[this.itemFields[i]] = fields[i];
+        for (let i in itemFields)
+            item[itemFields[i]] = fields[i];
         items.push(item);
     }
     this.items = items;

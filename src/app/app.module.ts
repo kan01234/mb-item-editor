@@ -8,6 +8,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { ItemModifierComponent } from './item-modifier/item-modifier.component';
 import { ItemListComponent } from './item-list/item-list.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 // import { ProductListComponent } from './product-list/product-list.component';
 
@@ -15,6 +16,7 @@ import { ItemListComponent } from './item-list/item-list.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    Ng2SmartTableModule,
     RouterModule.forRoot([
       { path: '', component: ItemModifierComponent }
     ])
@@ -24,8 +26,8 @@ import { ItemListComponent } from './item-list/item-list.component';
     TopBarComponent,
     UploadFileComponent,
     ItemModifierComponent,
-    ItemListComponent
-    // ProductListComponent
+    ItemListComponent,
+        // ProductListComponent
   ],
   bootstrap: [ AppComponent ]
 })

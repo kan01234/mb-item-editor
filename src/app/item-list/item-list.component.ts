@@ -9,6 +9,68 @@ import { Item } from '../common/Item';
 
 export class ItemListComponent {
 
+  settings = {
+    columns: {
+      id: {
+        title: 'id'
+      },
+      name: {
+        title: 'name'
+      },
+      displayName: {
+        title: 'displayName'
+      },
+      itemType: {
+        title: 'itemType'
+      },
+      availability: {
+        title: 'availability'
+      },
+      price: {
+        title: 'price'
+      },
+      allowPrefix: {
+        title: 'allowPrefix'
+      },
+      weight: {
+        title: 'weight'
+      },
+      toFill: {
+        title: 'toFill'
+      },
+      headDef: {
+        title: 'headDef'
+      },
+      bodyDef: {
+        title: 'bodyDef'
+      },
+      legDef: {
+        title: 'legDef'
+      },
+      prerequisite: {
+        title: 'prerequisite'
+      },
+      durability: {
+        title: 'durability'
+      },
+      weaponSpeed: {
+        title: 'weaponSpeed'
+      },
+      speed: {
+        title: 'speed'
+      },
+      area: {
+        title: 'area'
+      },
+      amount: {
+        title: 'amount'
+      },
+      damage: {
+        title: 'damage'
+      }
+    }
+  };
+
   @Input() items: Item[] = [];
 
 }
