@@ -2,10 +2,12 @@
     <div class="upload-file-box">
         <h3>upload item data file</h3>
         <app-upload-file (frCompolete)="itemDatafrCompolete($event)"></app-upload-file>
+        <app-download-file [content]="itemDataContent" [fileName]="itemDataFileName" [btnText]="itemDataBtnText"></app-download-file>
     </div>
     <div class="upload-file-box">
         <h3>upload item name</h3>
         <app-upload-file (frCompolete)="itemNamefrCompolete($event)"></app-upload-file>
+        <app-download-file [content]="itemNameContent" [fileName]="itemNameFileName" [btnText]="itemNameBtnText"></app-download-file>
     </div>
 </div>
 

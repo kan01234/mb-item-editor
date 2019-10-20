@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~8.2.11",
     "@angular/platform-browser-dynamic": "~8.2.11",
     "@angular/router": "~8.2.11",
+    "file-saver": "^2.0.2",
     "ng2-completer": "^3.0.2",
     "ng2-smart-table": "^1.5.0",
     "rxjs": "~6.4.0",

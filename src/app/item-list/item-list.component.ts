@@ -13,11 +13,12 @@ export class ItemListComponent {
   settings = {
     pager: {
       display: true,
-      perPage: 100
+      perPage: 1000
     },
     columns: {
       id: {
-        title: 'id'
+        title: 'id',
+        filter: true
       },
       name: {
         title: 'name'

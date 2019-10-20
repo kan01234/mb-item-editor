@@ -9,6 +9,7 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
 import { ItemModifierComponent } from './item-modifier/item-modifier.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { DownloadFileComponent } from './download-file/download-file.component';
 
 // import { ProductListComponent } from './product-list/product-list.component';
 
@@ -27,6 +28,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     UploadFileComponent,
     ItemModifierComponent,
     ItemListComponent,
+    DownloadFileComponent,
         // ProductListComponent
   ],
   bootstrap: [ AppComponent ]
