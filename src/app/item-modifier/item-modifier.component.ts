@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Item } from '../common/Item';
 import { ItemListComponent } from '../item-list/item-list.component';
 import { LocalDataSource } from 'ng2-smart-table';
+import { saveAs } from 'file-saver';
 
 const itemFields: string[] = [
   'name',
@@ -82,6 +83,20 @@ export class ItemModifierComponent {
       item.mappedName = this.itemNames[item.name];
     console.log('refresh');
     this.dataSource = new LocalDataSource(this.items);
+  }
+
+  download(data: Blob, fileName: string) {
+    saveAs(data, fileName);
+  }
+
+  itemsToBlob(items: Item[]): string {
+    const lineBreak: string = '\n';
+    let result: string =  'itemsfile version 3' + lineBreak;
+    result += items.length + lineBreak;
+    for (let item of items) {
+
+    }
+    return result;
   }
 
 }
