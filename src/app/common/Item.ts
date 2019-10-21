@@ -1,6 +1,8 @@
 export class Item {
 
-  constructor() {}
+  constructor() {
+    this.additionalLines = '';
+  }
 
   // item count
   id: number;
@@ -75,5 +77,7 @@ export class Item {
   damage: number;
 
   mappedName: string;
+
+  additionalLines: string;
 
 }
