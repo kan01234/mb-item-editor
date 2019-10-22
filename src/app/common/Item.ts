@@ -76,8 +76,12 @@ export class Item {
   // 穿刺带来的伤；马：冲刺(无伤害类别)
   damage: number;
 
+  damge2: number;
+
   mappedName: string;
 
   additionalLines: string;
+
+  originalFields: string[];
 
 }
