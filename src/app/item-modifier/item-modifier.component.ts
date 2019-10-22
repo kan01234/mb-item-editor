@@ -55,7 +55,7 @@ export class ItemModifierComponent {
   items: {};
   itemKeys: string[];
   itemNames: {} = {};
-  tableConfigs;
+  tableConfigs = [];
   tableConfigOrders: string[];
 
   itemDataContent: string = '';
@@ -68,8 +68,11 @@ export class ItemModifierComponent {
 
   constructor() {
     this.tableConfigOrders = [ '23', '25', '27', '0' ];
-    this.tableConfigs = [ {}, {}, {}, {} ];
-    
+    this.tableConfigOrders.forEach((value, index) => {
+      this.tableConfigs[index] = {
+        id: value + '-tabcontent'
+      }
+    });
   }
 
   itemDatafrCompolete(str: string) {
@@ -176,6 +179,27 @@ export class ItemModifierComponent {
     for (let k in mapFields)
       items[k] = [];
     return items;
+  }
+
+  openTab(event, targetId: string) {
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+  
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+  
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    console.log(targetId);
+    document.getElementById(targetId).style.display = "block";
+    event.currentTarget.className += " active";
   }
 
 }
