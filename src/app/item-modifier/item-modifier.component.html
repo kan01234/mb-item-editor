@@ -19,4 +19,4 @@
     <button class="tablinks" (click)="openTab($event, tableConfigOrder + '-tabcontent')" *ngFor="let tableConfigOrder of tableConfigOrders">{{ tableConfigOrder }}</button>
 </div>
 
-<app-item-list [dataSource]="tableConfig.dataSource" *ngFor="let tableConfig of tableConfigs" class="tabcontent" [id]="tableConfig.id"></app-item-list>
+<app-item-list [settings]="tableConfig.settings" [dataSource]="tableConfig.dataSource" *ngFor="let tableConfig of tableConfigs" class="tabcontent" [id]="tableConfig.id"></app-item-list>

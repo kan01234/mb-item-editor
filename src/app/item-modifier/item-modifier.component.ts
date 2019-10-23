@@ -4,6 +4,7 @@ import { ItemListComponent } from '../item-list/item-list.component';
 import { LocalDataSource } from 'ng2-smart-table';
 import { saveAs } from 'file-saver';
 import { Local } from 'protractor/built/driverProviders';
+import { filter } from 'minimatch';
 
 const mapFields = {
   23: {
@@ -52,7 +53,7 @@ const mapFields = {
 
 export class ItemModifierComponent {
 
-  items: {};
+  items: Item[];
   itemKeys: string[];
   itemNames: {} = {};
   tableConfigs = [];
@@ -69,16 +70,40 @@ export class ItemModifierComponent {
   constructor() {
     this.tableConfigOrders = [ '23', '25', '27', '0' ];
     this.tableConfigOrders.forEach((value, index) => {
-      this.tableConfigs[index] = {
-        id: value + '-tabcontent'
+      let tableConfig = {}
+      tableConfig['id'] = `${value}-tabcontent`;
+      let settings = {
+        pager: {
+          display: true,
+          perPage: 100
+        },
+        columns: {
+          id: {
+            title: 'id',
+            filter: true
+          },
+          name: {
+            title: 'name'
+          },
+          mappedName: {
+            title: 'mappedName'
+          }
+        }
+      };
+      for (let field of Object.keys(mapFields[value])) {
+        settings.columns[field] = {
+          title: field,
+        }
       }
+      tableConfig['settings'] = settings;
+      this.tableConfigs.push(tableConfig)
     });
   }
 
   itemDatafrCompolete(str: string) {
     const regexp = /^ ([a-z][a-z_0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*[0-9]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)/gm;
     let lines = str.split(/\r?\n/);
-    this.items = this.initItemsMap();
+    this.items = [];
     let count = 0;
     let item: Item;
     let fileCount: number = parseInt(lines[1]);
@@ -94,7 +119,6 @@ export class ItemModifierComponent {
       }
     }
     this.addItem(item);
-    console.log(this.items);
     if (fileCount != count) {
       // TODO throw error to UI?
       console.error(`file count not match, file count: ${fileCount}, read count: ${count}`);
@@ -105,10 +129,7 @@ export class ItemModifierComponent {
   addItem(item: Item) {
     if (!item)
       return;
-    let len = item.originalFields.length;
-    let k = (len in mapFields ? len : 0) + '';
-    this.items[k].push(item);
-    this.itemKeys.push(item.name);
+    this.items.push(item);
   }
 
   buildItem(line: string, id: number): Item {
@@ -137,18 +158,34 @@ export class ItemModifierComponent {
   }
 
   mapItems() {
-    // if (this.items.length <= 0 || Object.entries(this.itemNames).length <= 0)
-    //   return;
-    // for(let item of this.items)
-    //   item.mappedName = this.itemNames[item.name];
-    // this.dataSource = new LocalDataSource(this.items);
-    // this.dataSources = {};
-    for (let k in this.tableConfigOrders)
-      this.tableConfigs[k]['dataSource'] = new LocalDataSource(this.items[this.tableConfigOrders[k]]);
+    if (!this.items || this.items.length <= 0)
+      return;
+    let handledFieldLengths = this.tableConfigOrders.slice(0, this.tableConfigOrders.length - 1);
+    let len = handledFieldLengths.length;
+    let filterItems = [];
+    for (let i = 0; i < len + 1; i++)
+      filterItems.push([]);
+    for (let item of this.items) {
+      item.mappedName = this.itemNames[item.name];
+      let indexOf = handledFieldLengths.indexOf(item.originalFields.length + '');
+      if (indexOf < 0)
+        filterItems[len].push(item);
+      else
+        filterItems[indexOf].push(item);
+    }
+    filterItems.forEach((value, index) => {
+      this.tableConfigs[index]['dataSource'] = value;
+    });
+    let ele = document.getElementsByClassName('tablinks')[0] as HTMLElement;
+    ele.click();
+  }
+
+  originalFieldsLenEqualsTo(ele, index, array) {
+      
   }
 
   downloadItems() {
-    // this.download(new Blob([ this.itemsString(this.items) ], { type: 'text/plain;charset=utf-8' }), this.itemDataFileName);
+    this.download(new Blob([ this.itemsString(this.items) ], { type: 'text/plain;charset=utf-8' }), this.itemDataFileName);
   }
 
   downloadItemNames() {
@@ -160,25 +197,18 @@ export class ItemModifierComponent {
   }
 
   itemsString(items: Item[]): string {
-    // const lineBreak: string = '\n';
-    // let result: string =  'itemsfile version 3' + lineBreak;
-    // result += items.length + lineBreak;
-    // for (let item of items) {
-    //   let itemStrs = [];
-    //   for (let field of itemFields)
-    //     itemStrs.push(item[field]);
-    //   result += itemStrs.join(' ') + lineBreak;
-    //   result += item.additionalLines;
-    // }
-    // return result;
-    return '';
-  }
-
-  initItemsMap(): {} {
-    let items = {};
-    for (let k in mapFields)
-      items[k] = [];
-    return items;
+    const lineBreak: string = '\n';
+    let result: string =  'itemsfile version 3' + lineBreak;
+    result += items.length + lineBreak;
+    let handledFieldLengths = this.tableConfigOrders.slice(0, this.tableConfigOrders.length - 1);
+    let len = handledFieldLengths.length;
+    for (let item of items) {
+      if (item.originalFields.length in mapFields) {
+        // TODO update originalFields
+      }
+      result += item.originalFields.join(' ') + lineBreak + item.additionalLines;
+    }
+    return result;
   }
 
   openTab(event, targetId: string) {
@@ -197,7 +227,6 @@ export class ItemModifierComponent {
     }
   
     // Show the current tab, and add an "active" class to the button that opened the tab
-    console.log(targetId);
     document.getElementById(targetId).style.display = "block";
     event.currentTarget.className += " active";
   }
