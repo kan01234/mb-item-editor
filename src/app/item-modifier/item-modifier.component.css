@@ -49,3 +49,16 @@
     from {opacity: 0;}
     to {opacity: 1;}
 }
+
+/* table rules */
+:host /deep/ ng2-smart-table thead > tr > th {
+    background: #36304a;
+}
+
+:host /deep/ ng2-smart-table thead > tr > th a, :host /deep/ ng2-smart-table thead > tr > th div {
+    color: #ffffff !important;
+}
+
+:host /deep/ ng2-smart-table td  {
+    border: 1px solid;
+}
