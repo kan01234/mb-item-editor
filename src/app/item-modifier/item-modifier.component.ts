@@ -73,6 +73,10 @@ export class ItemModifierComponent {
       let tableConfig = {}
       tableConfig['id'] = `${value}-tabcontent`;
       let settings = {
+        hideSubHeader: true,
+        actions: {
+          delete: false,
+        },
         pager: {
           display: true,
           perPage: 100
@@ -80,10 +84,12 @@ export class ItemModifierComponent {
         columns: {
           id: {
             title: 'id',
-            filter: true
+            filter: true,
+            editable: false,
           },
           name: {
-            title: 'name'
+            title: 'name',
+            editable: false,
           },
           mappedName: {
             title: 'mappedName'
