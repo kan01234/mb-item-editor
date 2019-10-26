@@ -1,6 +1,19 @@
-# ItemEditor
+# Mount and Blade Item Editor
+Mount and Blade Item Editor implement by AngularJS 8
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.12.
+
+## How to use
+working...
+
+### TODO
+- [x] update item data
+- [x] export item data
+- [ ] update item name
+- [ ] export item name
+- [ ] better wording on UI
+- [ ] write how to use
+- [ ] make docker file
 
 ## Development server
 
