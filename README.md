@@ -4,8 +4,22 @@ Mount and Blade Item Editor implement by AngularJS 8
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.12.
 
 ## How to use
-working...
+1. upload data file (item_kinds1.txt, item_kinds.csv)
+![upload files](https://github.com/kan01234/mb-item-editor/blob/master/img/sc-1.png)
 
+2. switch to anothe tab
+![swtich tab](https://github.com/kan01234/mb-item-editor/blob/master/img/sc-2.png)
+
+3. item data
+![item data](https://github.com/kan01234/mb-item-editor/blob/master/img/sc-3.png)
+click "Edit" to change item data
+
+4. modify item data
+![modify item data](https://github.com/kan01234/mb-item-editor/blob/master/img/sc-4.png)
+click "Update" to save, "Cancel" to cancel
+
+5. export item data
+![export item data](https://github.com/kan01234/mb-item-editor/blob/master/img/sc-5.png)
 
 ### TODO
 - [x] update item data
