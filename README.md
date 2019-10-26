@@ -1,5 +1,5 @@
-# Mount and Blade Item Editor
-Mount and Blade Item Editor implement by AngularJS 8
+# Mount & Blade: Warband Item Editor
+[Mount & Blade: Warband](https://en.wikipedia.org/wiki/Mount_%26_Blade:_Warband) Item Editor implement by AngularJS 8
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.12.
 
