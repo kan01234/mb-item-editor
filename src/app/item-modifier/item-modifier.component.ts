@@ -203,10 +203,10 @@ export class ItemModifierComponent {
     let handledFieldLengths = this.tableConfigOrders.slice(0, this.tableConfigOrders.length - 1);
     let len = handledFieldLengths.length;
     for (let item of items) {
-      if (item.originalFields.length in mapFields) {
-        // TODO update originalFields
-      }
-      result += item.originalFields.join(' ') + lineBreak + item.additionalLines;
+      if (len in mapFields)
+        for (let key in mapFields[len])
+          item.originalFields[mapFields[len][key]] = item[key];
+      result += ' ' + item.originalFields.join(' ') + lineBreak + item.additionalLines;
     }
     return result;
   }
