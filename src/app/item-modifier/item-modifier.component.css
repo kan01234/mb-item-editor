@@ -40,6 +40,10 @@
     border-top: none;
 }
 
+.tabcontent.active {
+    display: block !important;
+}
+
 .tabcontent {
     animation: fadeEffect 1s; /* Fading effect takes 1 second */
 }

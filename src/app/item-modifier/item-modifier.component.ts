@@ -5,6 +5,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { saveAs } from 'file-saver';
 import { Local } from 'protractor/built/driverProviders';
 import { filter } from 'minimatch';
+import { ItemTableCellComponent } from '../item-table-cell/item-table-cell.component';
 
 const mapFields = {
   23: {
@@ -67,6 +68,9 @@ export class ItemModifierComponent {
   itemNameFileName: string = 'item_kind.csv';
   itemNameBtnText: string = 'export item name';
 
+  activeColumnIndex: number = -1;
+  activeClassName = 'active';
+
   constructor() {
     this.tableConfigOrders = [ '23', '25', '27', '0' ];
     this.tableConfigOrders.forEach((value, index) => {
@@ -92,18 +96,45 @@ export class ItemModifierComponent {
             editable: false,
           },
           mappedName: {
-            title: 'mappedName'
-          }
-        }
+            title: 'mappedName',
+          },
+        },
       };
       for (let field of Object.keys(mapFields[value])) {
         settings.columns[field] = {
           title: field,
         }
       }
+      for (let key in settings.columns) {
+        let column = settings.columns[key];
+        column.type = 'custom';
+        column.renderComponent = ItemTableCellComponent;
+        column.onComponentInitFunction = (instance: any) => {
+          instance.mouseover.subscribe(this.handleCellMouseover);
+        };
+      }
       tableConfig['settings'] = settings;
       this.tableConfigs.push(tableConfig)
     });
+  }
+
+  handleCellMouseover = (event) => {
+    // TODO add active class?
+    console.log('mouseover');
+    // let td = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+    // let tr = td.parentNode;
+    // let childs = tr.querySelectorAll('td');
+    // for (let i in childs) {
+    //   if(childs[i] == td) {
+    //     this.activeColumnIndex = Number.parseInt(i) + 1;
+    //     break;
+    //   }
+    // }
+    // console.log(document.querySelectorAll(`.tabcontent.active tr td:nth-child(${this.activeColumnIndex})`));
+    // document.querySelectorAll(`.tabcontent.active tr td:nth-child(${this.activeColumnIndex})`).forEach(value => {
+    //   let ele = value as HTMLElement;
+    //   ele.classList.add(this.activeClassName);
+    // });
   }
 
   itemDatafrCompolete(str: string) {
@@ -219,6 +250,7 @@ export class ItemModifierComponent {
 
   openTab(event, targetId: string) {
     var i, tabcontent, tablinks;
+    const activeCLassName = 'active';
 
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -233,8 +265,8 @@ export class ItemModifierComponent {
     }
   
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(targetId).style.display = "block";
-    event.currentTarget.className += " active";
+    document.getElementById(targetId).classList.add(activeCLassName);
+    event.currentTarget.classList.add(activeCLassName);
   }
 
 }

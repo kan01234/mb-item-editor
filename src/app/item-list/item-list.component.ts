@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Item } from '../common/Item';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
