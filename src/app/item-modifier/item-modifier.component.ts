@@ -71,6 +71,8 @@ export class ItemModifierComponent {
   activeColumnIndex: number = -1;
   activeClassName = 'active';
 
+  style;
+
   constructor() {
     this.tableConfigOrders = [ '23', '25', '27', '0' ];
     this.tableConfigOrders.forEach((value, index) => {
@@ -120,21 +122,22 @@ export class ItemModifierComponent {
 
   handleCellMouseover = (event) => {
     // TODO add active class?
-    console.log('mouseover');
-    // let td = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-    // let tr = td.parentNode;
-    // let childs = tr.querySelectorAll('td');
-    // for (let i in childs) {
-    //   if(childs[i] == td) {
-    //     this.activeColumnIndex = Number.parseInt(i) + 1;
-    //     break;
-    //   }
-    // }
-    // console.log(document.querySelectorAll(`.tabcontent.active tr td:nth-child(${this.activeColumnIndex})`));
-    // document.querySelectorAll(`.tabcontent.active tr td:nth-child(${this.activeColumnIndex})`).forEach(value => {
-    //   let ele = value as HTMLElement;
-    //   ele.classList.add(this.activeClassName);
-    // });
+    let td = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+    let tr = td.parentNode;
+    let childs = tr.querySelectorAll('td');
+    for (let i in childs) {
+      if(childs[i] == td) {
+        this.activeColumnIndex = Number.parseInt(i) + 1;
+        break;
+      }
+    }
+    if (this.style)
+      document.head.removeChild(this.style);
+    this.style = document.createElement('style');
+    this.style.innerHTML = `.tabcontent.active tr td:nth-child(${this.activeColumnIndex}) {
+      background: #d1ccde;
+    }`;
+    document.head.appendChild(this.style);
   }
 
   itemDatafrCompolete(str: string) {
