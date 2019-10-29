@@ -10,6 +10,7 @@ import { ViewCell } from 'ng2-smart-table';
 export class ItemTableCellComponent implements ViewCell, OnInit {
 
     renderValue: string;
+    index;
 
     @Input() value: string | number;
     @Input() rowData: any;
@@ -17,7 +18,8 @@ export class ItemTableCellComponent implements ViewCell, OnInit {
     @Output() mouseover: EventEmitter<any> = new EventEmitter();
   
     ngOnInit() {
-      this.renderValue = this.value.toString();
+      this.renderValue = this.value['value'];
+      this.index = this.value['index'];
     }
 
 }

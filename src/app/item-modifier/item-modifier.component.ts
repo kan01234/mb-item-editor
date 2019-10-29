@@ -78,6 +78,7 @@ export class ItemModifierComponent {
     this.tableConfigOrders.forEach((value, index) => {
       let tableConfig = {}
       tableConfig['id'] = `${value}-tabcontent`;
+      let count = 2;
       let settings = {
         hideSubHeader: true,
         actions: {
@@ -92,19 +93,44 @@ export class ItemModifierComponent {
             title: 'id',
             filter: true,
             editable: false,
+            valuePrepareFunction: (value) => {
+              return {
+                value: value,
+                index: count++,
+              }
+            },
           },
           name: {
             title: 'name',
             editable: false,
+            valuePrepareFunction: (value) => {
+              return {
+                value: value,
+                index: count++,
+              }
+            },
           },
           mappedName: {
             title: 'mappedName',
+            valuePrepareFunction: (value) => {
+              return {
+                value: value,
+                index: count++,
+              }
+            },
           },
         },
       };
+      
       for (let field of Object.keys(mapFields[value])) {
         settings.columns[field] = {
           title: field,
+          valuePrepareFunction: (value) => {
+            return {
+              value: value,
+              index: count++,
+            }
+          },
         }
       }
       for (let key in settings.columns) {
@@ -122,15 +148,7 @@ export class ItemModifierComponent {
 
   handleCellMouseover = (event) => {
     // TODO add active class?
-    let td = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-    let tr = td.parentNode;
-    let childs = tr.querySelectorAll('td');
-    for (let i in childs) {
-      if(childs[i] == td) {
-        this.activeColumnIndex = Number.parseInt(i) + 1;
-        break;
-      }
-    }
+    this.activeColumnIndex = event.target.dataset.columnIndex;
     if (this.style)
       document.head.removeChild(this.style);
     this.style = document.createElement('style');
