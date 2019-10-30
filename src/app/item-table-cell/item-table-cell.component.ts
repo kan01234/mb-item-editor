@@ -18,7 +18,8 @@ export class ItemTableCellComponent implements ViewCell, OnInit {
     @Output() mouseover: EventEmitter<any> = new EventEmitter();
   
     ngOnInit() {
-      this.renderValue = this.value['value'];
+      let value = this.value['value'];
+      this.renderValue = (value == undefined || value == '') ? '&nbsp;' : value;
       this.name = this.value['name'];
     }
 
