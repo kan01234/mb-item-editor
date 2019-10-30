@@ -10,7 +10,7 @@ import { ViewCell } from 'ng2-smart-table';
 export class ItemTableCellComponent implements ViewCell, OnInit {
 
     renderValue: string;
-    index;
+    name;
 
     @Input() value: string | number;
     @Input() rowData: any;
@@ -19,7 +19,7 @@ export class ItemTableCellComponent implements ViewCell, OnInit {
   
     ngOnInit() {
       this.renderValue = this.value['value'];
-      this.index = this.value['index'];
+      this.name = this.value['name'];
     }
 
 }

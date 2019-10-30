@@ -68,7 +68,7 @@ export class ItemModifierComponent {
   itemNameFileName: string = 'item_kind.csv';
   itemNameBtnText: string = 'export item name';
 
-  activeColumnIndex: number = -1;
+  activeColumnName: number = -1;
   activeClassName = 'active';
 
   style;
@@ -93,31 +93,13 @@ export class ItemModifierComponent {
             title: 'id',
             filter: true,
             editable: false,
-            valuePrepareFunction: (value) => {
-              return {
-                value: value,
-                index: count++,
-              }
-            },
           },
           name: {
             title: 'name',
             editable: false,
-            valuePrepareFunction: (value) => {
-              return {
-                value: value,
-                index: count++,
-              }
-            },
           },
           mappedName: {
             title: 'mappedName',
-            valuePrepareFunction: (value) => {
-              return {
-                value: value,
-                index: count++,
-              }
-            },
           },
         },
       };
@@ -125,12 +107,6 @@ export class ItemModifierComponent {
       for (let field of Object.keys(mapFields[value])) {
         settings.columns[field] = {
           title: field,
-          valuePrepareFunction: (value) => {
-            return {
-              value: value,
-              index: count++,
-            }
-          },
         }
       }
       for (let key in settings.columns) {
@@ -140,6 +116,12 @@ export class ItemModifierComponent {
         column.onComponentInitFunction = (instance: any) => {
           instance.mouseover.subscribe(this.handleCellMouseover);
         };
+        column.valuePrepareFunction = (value) => {
+          return {
+            value: value,
+            name: key
+          }
+        };
       }
       tableConfig['settings'] = settings;
       this.tableConfigs.push(tableConfig)
@@ -148,14 +130,12 @@ export class ItemModifierComponent {
 
   handleCellMouseover = (event) => {
     // TODO add active class?
-    this.activeColumnIndex = event.target.dataset.columnIndex;
+    this.activeColumnName = event.target.dataset.columnName;
     if (this.style)
       document.head.removeChild(this.style);
-    this.style = document.createElement('style');
-    this.style.innerHTML = `.tabcontent.active tr td:nth-child(${this.activeColumnIndex}) {
-      background: #d1ccde;
-    }`;
-    document.head.appendChild(this.style);
+    document.querySelectorAll(`.tabcontent.active tr td [data-column-name="${this.activeColumnName}"]`).forEach((value) => {
+      value.classList.add(this.activeClassName);
+    });
   }
 
   itemDatafrCompolete(str: string) {

@@ -55,7 +55,7 @@
 }
 
 /* table rules */
-:host /deep/ ng2-smart-table tr:hover {
+:host /deep/ ng2-smart-table tr:hover, :host /deep/ ng2-smart-table td .active {
     background: #d1ccde;
 }
 
@@ -67,6 +67,11 @@
     color: #ffffff !important;
 }
 
-:host /deep/ ng2-smart-table td  {
+:host /deep/ ng2-smart-table table tr td  {
     border: 1px solid;
+    padding: 0;
+}
+
+:host /deep/ app-item-table-cell div {
+    padding: 0.25em;
 }
