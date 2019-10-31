@@ -71,8 +71,6 @@ export class ItemModifierComponent {
   activeColumnName: number = -1;
   activeClassName = 'active';
 
-  style;
-
   constructor() {
     this.tableConfigOrders = [ '23', '25', '27', '0' ];
     this.tableConfigOrders.forEach((value, index) => {
@@ -255,24 +253,18 @@ export class ItemModifierComponent {
   }
 
   openTab(event, targetId: string) {
-    var i, tabcontent, tablinks;
-    const activeCLassName = 'active';
+    // remove all active class
+    document.querySelectorAll('.tablinks').forEach((value) => {
+      value.classList.remove(this.activeClassName);
+    });
 
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-  
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-  
-    // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(targetId).classList.add(activeCLassName);
-    event.currentTarget.classList.add(activeCLassName);
+    document.querySelectorAll('.tabcontent').forEach((value) => {
+      value.classList.remove(this.activeClassName);
+    });
+
+    // add active class
+    document.getElementById(targetId).classList.add(this.activeClassName);
+    event.currentTarget.classList.add(this.activeClassName);
   }
 
 }
