@@ -115,6 +115,7 @@ export class ItemModifierComponent {
         column.renderComponent = ItemTableCellComponent;
         column.onComponentInitFunction = (instance: any) => {
           instance.mouseover.subscribe(this.handleCellMouseover);
+          instance.mouseout.subscribe(this.handleCellMouseout);
         };
         column.valuePrepareFunction = (value) => {
           return {
@@ -129,12 +130,16 @@ export class ItemModifierComponent {
   }
 
   handleCellMouseover = (event) => {
-    // TODO add active class?
     this.activeColumnName = event.target.dataset.columnName;
-    if (this.style)
-      document.head.removeChild(this.style);
     document.querySelectorAll(`.tabcontent.active tr td [data-column-name="${this.activeColumnName}"]`).forEach((value) => {
       value.classList.add(this.activeClassName);
+    });
+  }
+
+  handleCellMouseout = (event) => {
+    this.activeColumnName = event.target.dataset.columnName;
+    document.querySelectorAll(`.tabcontent.active tr td [data-column-name="${this.activeColumnName}"]`).forEach((value) => {
+      value.classList.remove(this.activeClassName);
     });
   }
 

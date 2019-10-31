@@ -56,11 +56,16 @@
 
 /* table rules */
 :host /deep/ ng2-smart-table tr:hover, :host /deep/ ng2-smart-table td .active {
-    background: #d1ccde;
+    background: #cfd8dc;
+}
+
+:host /deep/ ng2-smart-table td:hover .active {
+    background: #455a64;
+    color: #ffffff;
 }
 
 :host /deep/ ng2-smart-table thead > tr > th {
-    background: #36304a;
+    background: #263238;
 }
 
 :host /deep/ ng2-smart-table thead > tr > th a, :host /deep/ ng2-smart-table thead > tr > th div {

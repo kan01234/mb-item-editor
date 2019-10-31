@@ -16,6 +16,7 @@ export class ItemTableCellComponent implements ViewCell, OnInit {
     @Input() rowData: any;
 
     @Output() mouseover: EventEmitter<any> = new EventEmitter();
+    @Output() mouseout: EventEmitter<any> = new EventEmitter();
   
     ngOnInit() {
       let value = this.value['value'];
