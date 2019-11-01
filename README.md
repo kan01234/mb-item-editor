@@ -24,8 +24,8 @@ click "Update" to save, "Cancel" to cancel
 ### TODO
 - [x] update item data
 - [x] export item data
-- [ ] update item name
-- [ ] export item name
+- [x] update item name
+- [x] export item name
 - [ ] better wording on UI
 - [ ] write how to use
 - [ ] make docker file
