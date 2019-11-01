@@ -230,7 +230,14 @@ export class ItemModifierComponent {
   }
 
   downloadItemNames() {
-    // TODO
+    const lineBreak: string = '\n';
+    let result: string = '' + lineBreak;
+    this.items.forEach(item => {
+      if (item.mappedName == undefined)
+        return;
+      result += `${item.name}|${item.mappedName}${lineBreak}`;
+    });
+    this.download(new Blob ([ result ], { type: 'text/plain; charset=utf-8' }), this.itemNameFileName);
   }
 
   download(data: Blob, fileName: string) {
