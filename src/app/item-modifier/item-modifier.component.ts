@@ -144,7 +144,13 @@ export class ItemModifierComponent {
   }
 
   handleEditConfirm = (event) => {
-    console.log(event);
+    let newItem = event.newData;
+    let len = newItem.originalFields.length;
+    let map = mapFields[len];
+    for (let key in map)
+    newItem.originalFields[map[key]] = newItem[key];
+    this.items[newItem.id] = newItem;
+    event.confirm.resolve();
   }
 
   itemDatafrCompolete(str: string) {
@@ -228,7 +234,7 @@ export class ItemModifierComponent {
   }
 
   downloadItems() {
-    this.download(new Blob([ this.itemsString(this.items) ], { type: 'text/plain;charset=utf-8' }), this.itemDataFileName);
+    this.download(new Blob([ this.buildItemsString(this.items) ], { type: 'text/plain;charset=utf-8' }), this.itemDataFileName);
   }
 
   downloadItemNames() {
@@ -246,7 +252,7 @@ export class ItemModifierComponent {
     saveAs(data, fileName);
   }
 
-  itemsString(items: Item[]): string {
+  buildItemsString(items: Item[]): string {
     const lineBreak: string = '\n';
     let result: string =  'itemsfile version 3' + lineBreak;
     result += items.length + lineBreak;
