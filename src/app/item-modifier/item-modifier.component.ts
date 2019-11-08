@@ -143,6 +143,10 @@ export class ItemModifierComponent {
     });
   }
 
+  handleEditConfirm = (event) => {
+    console.log(event);
+  }
+
   itemDatafrCompolete(str: string) {
     const regexp = /^ ([a-z][a-z_0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*[0-9]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)[ ]*([A-Z_a-z0-9\.]*)/gm;
     let lines = str.split(/\r?\n/);
@@ -221,10 +225,6 @@ export class ItemModifierComponent {
     });
     let ele = document.getElementsByClassName('tablinks')[0] as HTMLElement;
     ele.click();
-  }
-
-  originalFieldsLenEqualsTo(ele, index, array) {
-      
   }
 
   downloadItems() {
