@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { Item } from '../common/Item';
-import { ItemListComponent } from '../item-list/item-list.component';
 import { LocalDataSource } from 'ng2-smart-table';
 import { saveAs } from 'file-saver';
 import { Local } from 'protractor/built/driverProviders';
@@ -99,6 +98,9 @@ export class ItemModifierComponent {
           mappedName: {
             title: 'mappedName',
           },
+        },
+        edit: {
+          confirmSave: true,
         },
       };
       

@@ -19,5 +19,7 @@
     <div class="tab">
         <button class="tablinks" (click)="openTab($event, tableConfigOrder + '-tabcontent')" *ngFor="let tableConfigOrder of tableConfigOrders">{{ tableConfigOrder }}</button>
     </div>
-    <app-item-list [settings]="tableConfig.settings" [dataSource]="tableConfig.dataSource" *ngFor="let tableConfig of tableConfigs" class="tabcontent" [id]="tableConfig.id"></app-item-list>
+    <div class="table-box tabcontent" *ngFor="let tableConfig of tableConfigs" [id]="tableConfig.id">
+        <ng2-smart-table [settings]="tableConfig.settings" [source]="tableConfig.dataSource" (cellMousover)="test($event)"></ng2-smart-table>
+    </div>
 </div>

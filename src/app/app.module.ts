@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { ItemModifierComponent } from './item-modifier/item-modifier.component';
-import { ItemListComponent } from './item-list/item-list.component';
 import { ItemTableCellComponent } from './item-table-cell/item-table-cell.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
@@ -27,9 +26,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     TopBarComponent,
     UploadFileComponent,
     ItemModifierComponent,
-    ItemListComponent,
     ItemTableCellComponent,
-        // ProductListComponent
   ],
   bootstrap: [ AppComponent ],
   entryComponents: [
