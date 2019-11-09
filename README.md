@@ -26,6 +26,7 @@ click "Update" to save, "Cancel" to cancel
 - [x] export item data
 - [x] update item name
 - [x] export item name
+- [x] edit item
 - [ ] better wording on UI
 - [ ] write how to use
 - [ ] make docker file

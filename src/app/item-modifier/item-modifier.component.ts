@@ -148,7 +148,8 @@ export class ItemModifierComponent {
     let len = newItem.originalFields.length;
     let map = mapFields[len];
     for (let key in map)
-    newItem.originalFields[map[key]] = newItem[key];
+      newItem.originalFields[map[key]] = newItem[key];
+    // TODO split for chinese?
     this.items[newItem.id] = newItem;
     event.confirm.resolve();
   }
